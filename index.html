@@ -1,41 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bible Study App</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechHub Laptops</title>
+<link rel="icon" type="image/x-icon" href="/api/placeholder/32/32">
+<style>
+- {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
+}
+nav {
+background: #333;
+padding: 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
+}
+.logo {
+color: white;
+font-size: 1.5rem;
+font-weight: bold;
+}
+.nav-links {
+display: flex;
+list-style: none;
+}
+.nav-links li a {
+color: white;
+text-decoration: none;
+padding: 0 1rem;
+}
+.hamburger {
+display: none;
+flex-direction: column;
+cursor: pointer;
+}
+.hamburger span {
+width: 25px;
+height: 3px;
+background: white;
+margin: 2px 0;
+}
+.main-content {
+margin-top: 80px;
+padding: 2rem;
+}
+.products-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+.product-card {
+border: 1px solid #ddd;
+padding: 1rem;
+border-radius: 8px;
+text-align: center;
+}
+.product-card img {
+max-width: 100%;
+height: auto;
+}
+.cart-float {
+position: fixed;
+top: 80px;
+right: 20px;
+background: #333;
+padding: 1rem;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+max-width: 300px;
+z-index: 999;
+color: white;
+}
+.cart-float button {
+background: #007bff;
+color: white;
+border: none;
+padding: 0.5rem 1rem;
+border-radius: 5px;
+cursor: pointer;
+}
+.cart-float button:hover {
+background: #0056b3;
+}
+.whatsapp-float {
+position: fixed;
+bottom: 20px;
+right: 20px;
+background: #25D366;
+color: white;
+padding: 1rem;
+border-radius: 50px;
+text-decoration: none;
+box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.pagination {
+display: flex;
+justify-content: center;
+margin-top: 2rem;
+gap: 1rem;
+}
+.pagination button {
+padding: 0.5rem 1rem;
+cursor: pointer;
+}
+@media (max-width: 768px) {
+.hamburger {
+display: flex;
+}
+.nav-links {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+background: #333;
+flex-direction: column;
+padding: 1rem;
+}
+.nav-links.active {
+display: flex;
+}
+.nav-links li {
+margin: 0.5rem 0;
+}
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Bible Study App</h1>
-            <div class="version-selector">
-                <select id="version-select">
-                    <option value="nkjv">New King James Version (NKJV)</option>
-                    <option value="niv">New International Version (NIV)</option>
-                </select>
-            </div>
-        </header>
-
-        <div class="bible-navigation">
-            <select id="testament-select">
-                <option value="old">Old Testament</option>
-                <option value="new">New Testament</option>
-            </select>
-            <select id="book-select">
-                <!-- Books will be dynamically populated -->
-            </select>
-            <select id="chapter-select">
-                <!-- Chapters will be dynamically populated -->
-            </select>
-        </div>
-
-        <div id="bible-content" class="bible-content">
-            <div id="verse-display"></div>
-        </div>
-    </div>
-
-    <script src="bible.js"></script>
-</body>
-</html>
+<nav>
+<div class="logo">TechHub</div>
+<div class="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+<ul class="nav-links">
+<li><a href="#" class="page-link" data-page="1">Products</a></li>
+<li><a href="#" class="page-link" data-page="about">About Us</a></li>
+<li><a href="#" class="page-link" data-page="contact">Contact Us</a></li>
+</ul>
+</nav>
+<div class="cart-float" id="cart">
+<h3>Shopping Cart</h3>
+<div id="cart-items"></div>
+<p>Total: $<span id="cart-total">0</span></p>
+<button onclick="checkout()">Checkout</button>
+</div>
+<a href="(link unavailable)" class="whatsapp-float">Chat with us</a>
+<main class="main-content">
+<div id="products-page" class="page">
+<div class="products-grid" id="products"></div>
+<div class="pagination" id="pagination"></div>
+</div>
+<div id="about-page" class="page" style="display: none;">
+<h2>About Us</h2>
+<p>We are a premium laptop retailer committed to providing the best technology solutions for our customers.</p>
+</div>
+<div id="contact-page" class="page" style="display: none;">
+<h2>Contact Us</h2>
+<p>Phone: +256753979539</p>
+<p
